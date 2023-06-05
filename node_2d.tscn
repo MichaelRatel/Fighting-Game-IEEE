@@ -1,6 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://cjwm2x7dvoxj6"]
+[gd_scene load_steps=7 format=3 uid="uid://cjwm2x7dvoxj6"]
 
+[ext_resource type="Script" path="res://state.gd" id="1_oeyec"]
 [ext_resource type="Texture2D" uid="uid://b4nytjjhmht4p" path="res://sol_0000.bmp" id="1_rccna"]
+[ext_resource type="Script" path="res://persistent_state.gd" id="2_2j2hv"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_iybck"]
 
@@ -11,26 +13,29 @@ size = Vector2(10000, 271)
 size = Vector2(138, 285)
 
 [node name="Node2D" type="Node2D"]
+script = ExtResource("1_oeyec")
 
 [node name="Floor" type="StaticBody2D" parent="."]
 position = Vector2(-2, 0)
 physics_material_override = SubResource("PhysicsMaterial_iybck")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Floor"]
-position = Vector2(350.5, 135.5)
+position = Vector2(350.5, 150)
 shape = SubResource("RectangleShape2D_ymc6k")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(2, -257)
 
-[node name="Sol0000" type="Sprite2D" parent="."]
-position = Vector2(-416.25, -144)
+[node name="RigidBody2D" type="RigidBody2D" parent="."]
+position = Vector2(-400, -140)
+lock_rotation = true
+constant_force = Vector2(0, 10)
+script = ExtResource("2_2j2hv")
+
+[node name="SolPlaceholder" type="Sprite2D" parent="RigidBody2D"]
 texture = ExtResource("1_rccna")
 flip_h = true
 
-[node name="RigidBody2D" type="RigidBody2D" parent="Sol0000"]
-constant_force = Vector2(0, 10)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Sol0000/RigidBody2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D"]
 position = Vector2(-0.75, -3.5)
 shape = SubResource("RectangleShape2D_j0mpk")
