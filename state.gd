@@ -7,19 +7,19 @@ class_name State
 var change_state
 var animated_sprite
 var persistent_state
-var velocity = 0
+#var velocity = 0
 var direction = "right"
 
 # Default physics implementation that simply moves the player based on velocity
-# Not functional, move and slide is not defined.
-#func _physics_process(delta):
-	#persistent_state.move_and_slide(persistent_state.velocity, vector2.UP)
+
+func _physics_process(delta):
+	pass
 
 # Allows the FSM to reference itself to change states.
-func setup(change_state_, animated_sprite_, persistent_state_):
-	self.change_state = change_state_
-	self.animated_sprite = animated_sprite_
-	self.persistent_state = persistent_state_
+func setup(change_state, animated_sprite, persistent_state):
+	self.change_state = change_state
+	self.animated_sprite = animated_sprite
+	self.persistent_state = persistent_state
 
 # Unimplemented movement functions. forward and backward are both relevant to the location of player 2.
 func move_forward():

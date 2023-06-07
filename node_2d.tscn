@@ -26,16 +26,18 @@ shape = SubResource("RectangleShape2D_ymc6k")
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(2, -257)
 
-[node name="RigidBody2D" type="RigidBody2D" parent="."]
+[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+show_behind_parent = true
+top_level = true
 position = Vector2(-400, -140)
-lock_rotation = true
-constant_force = Vector2(0, 10)
+floor_constant_speed = true
 script = ExtResource("2_2j2hv")
 
-[node name="SolPlaceholder" type="Sprite2D" parent="RigidBody2D"]
+[node name="SolPlaceholder" type="Sprite2D" parent="CharacterBody2D"]
+visible = false
 texture = ExtResource("1_rccna")
-flip_h = true
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
 position = Vector2(-0.75, -3.5)
 shape = SubResource("RectangleShape2D_j0mpk")
+debug_color = Color(0, 0.6, 0.701961, 0.419608)

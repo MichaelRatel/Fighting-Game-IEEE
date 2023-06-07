@@ -9,7 +9,7 @@ var friction = 0.32
 # While in a walking state, do this:
 func _ready():
 	# play a walking animation
-	animated_sprite.play("walk")
+	#animated_sprite.play("walk")
 	# Flip our velocity based on direction of the player node
 	if direction == "left":
 		move_speed.x *= -1
@@ -20,7 +20,8 @@ func _ready():
 func _physics_process(_delta):
 	# If our velocity drops below the minimum, go back into an idle state.
 	if abs(persistent_state.velocity.x) < min_move_speed:
-		change_state.call_func("idle")
+		print("Too Slow!")
+		change_state.call("idle")
 	# After checking, apply force of friction
 	persistent_state.velocity.x *= friction
 	
@@ -31,8 +32,11 @@ func move_forwards():
 # While we are moving backwards, set our velocity back to 0, then change to the backwalk state. 
 func move_backwards():
 	persistent_state.velocity.x = 0
-	change_state.call_func("backwalk")
+	change_state.call("backwalk")
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
+	# add our speed to the velocity of the player
+	persistent_state.velocity += move_speed
+	print(persistent_state.velocity)
 	pass
