@@ -30,11 +30,9 @@ position = Vector2(2, -257)
 show_behind_parent = true
 top_level = true
 position = Vector2(-400, -140)
-floor_constant_speed = true
 script = ExtResource("2_2j2hv")
 
 [node name="SolPlaceholder" type="Sprite2D" parent="CharacterBody2D"]
-visible = false
 texture = ExtResource("1_rccna")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]

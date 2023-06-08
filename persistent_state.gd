@@ -5,12 +5,15 @@ class_name PersistentState
 var state
 var state_factory
 
-var velocity_ = Vector2()
-
+#var velocity = Vector2()
+func _physics_process(delta):
+	move_and_slide()
+	pass
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	state_factory = StateFactory.new()
+	
 	change_state("idle")
 
 
@@ -22,6 +25,8 @@ func _process(_delta):
 		move_forward()
 	elif Input.is_action_pressed("ui_right"):
 		move_backwards()
+	
+	
 	
 func move_forward():
 	state.move_forward()

@@ -4,15 +4,11 @@ class_name BackwalkState
 
 var move_speed = Vector2(180, 0)
 var min_move_speed = 0.005
-var friction = 0.32
+var friction = 0.003
 
 # While entering a backwards walking state, do this:
 func _ready():
-	# play a backwards walking animation
-	#animated_sprite.play("backwalk")
-	# Flip our velocity based on direction of the player node
-	if direction == "left":
-		move_speed.x *= -1
+	
 	# add our speed to the velocity of the player
 	persistent_state.velocity += move_speed
 
@@ -26,15 +22,17 @@ func _physics_process(_delta):
 	
 # while we are moving forwards, set our velocity back to 0, then change to the walking state
 func move_forwards():
-	persistent_state.velocity.x = 0
+	persistent_state.velocity = 0
 	change_state.call("walk")
 
 # While we are moving backwards, keep moving backwards.
 func move_backwards():
-	#print("Moving back!")
-	pass
+	print("continuing to move back")
+	persistent_state.velocity += move_speed
+	
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
-	print("in backwalk state")
+	#print("in backwalk state")
 	pass
+	
