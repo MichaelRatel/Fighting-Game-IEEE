@@ -4,6 +4,7 @@ extends Node2D
 # https://docs.godotengine.org/en/3.2/tutorials/misc/state_design_pattern.html
 class_name State
 
+var max_fps = 60
 var change_state
 var animated_sprite
 var persistent_state
