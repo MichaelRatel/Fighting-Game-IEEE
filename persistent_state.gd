@@ -1,49 +1,87 @@
-extends CharacterBody2D
+extends Node2D
 
 class_name PersistentState
 
 var state
 var state_factory
 
-#var velocity = Vector2()
-func _physics_process(delta):
-	move_and_slide()
-	pass
+#Probably move these somewhere else with the other character specific info
+#for now it works. Allows the speed to be modified from the inspector
+@export var forwardWalkSpeed : float = 360.0
+@export var backwardWalkSpeed : float = 240.0
+
+#Allows us to get information on the opponent, just set through the inspector
+#for now, should probably get a full constructor when characters are spawned in
+#through code. Used now for direction flipping
+@export var opponent : CharacterBody2D = null
+
+#I ended up moving the state off of the top of the chain. I think this all makes
+#sense, input informs the state, which then changes the sprite if needed. Which
+#tracks with the new layout of the scene
+var player : CharacterBody2D
+var sprite : Sprite2D
+
+enum directions {LEFT = -1, RIGHT = 1}
+var direction : directions = directions.RIGHT
+
+var shouldFlip : bool = true
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	player = get_parent()
+	sprite = get_node("SolPlaceholder")
+	
+	if(player.name == "Player2"):
+		direction = directions.LEFT
+		shouldFlip = false
+	
 	state_factory = StateFactory.new()
 	
+	if(direction == directions.RIGHT):
+		sprite.set_flip_h(shouldFlip)
+
 	change_state("idle")
 
+#This all can be removed eventually but for now its needed.
+#Honestly the movement included with the Godot state sample was awful
+#Using a whole vector for speed? Weird since speed is a scalar value. It also
+#had to be changed to allow for changes in direction with different walk speeds
+#which it now does.
+func _physics_process(_delta):
+	player.move_and_slide()
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
+#Checks the distance of the players every frame, if the sign of the distance
+#swaps from positive to negative, or vis versa, then the direction of the
+#players also swaps. 
 func _process(_delta):
-	#print(state.get_class())
-	#this is fine for now, i need to be able to move left and right for testing
-	if Input.is_action_pressed("ui_left"):
-		move_forward()
-	elif Input.is_action_pressed("ui_right"):
-		move_backwards()
-	
-	
-	
+	var distance = player.position.x - opponent.position.x
+	#print(test, player.name,direction)
+	if(direction == directions.LEFT && distance < 0):
+		_flip_direction()
+	elif(direction == directions.RIGHT && distance > 0):
+		_flip_direction()
+
 func move_forward():
 	state.move_forward()
 
 func move_backwards():
 	state.move_backwards()
-	
+
+# Switches direction of player character
+func _flip_direction():
+	shouldFlip = not shouldFlip
+	sprite.set_flip_h(shouldFlip)
+	direction *= -1
+
 func change_state(new_state_name):
-	print("change_state has been called. ")
+	print("change_state has been called with %s" % new_state_name)
 	if state != null:
 		state.queue_free()
-	#print(new_state_name)
 	#print(state_factory.get_state(new_state_name).new())
 	if(state_factory.get_state(new_state_name) == null):
 		pass
 	state = state_factory.get_state(new_state_name).new()
 	# NOTE: GODOT DOCS ARE NOT UPDATED TO GODOT 4 CALLS, THE PURPOSE OF "funcref" IN THE DOCS IS NOW USED BY "Callable"
-	state.setup(Callable(self, "change_state"), $SolPlaceholder, self)
+	state.setup(Callable(self, "change_state"), get_node("SolPlaceholder"), self)
 	state.name = "current_state"
 	add_child(state)

@@ -7,14 +7,9 @@ class_name State
 var change_state
 var animated_sprite
 var persistent_state
-#var velocity = 0
-var direction = "right"
-
 
 # Default physics implementation that simply moves the player based on velocity
-
 func _physics_process(delta):
-	
 	pass
 
 # Allows the FSM to reference itself to change states.
@@ -34,7 +29,6 @@ func check_movement_keys():
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass # Replace with function body.
-
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
