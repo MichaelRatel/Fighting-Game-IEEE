@@ -29,7 +29,7 @@ var shouldFlip : bool = true
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	player = get_parent()
-	sprite = get_node("SolPlaceholder")
+	sprite = get_node("PlayerSprite")
 	
 	if(player.name == "Player2"):
 		direction = directions.LEFT

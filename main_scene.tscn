@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://state.gd" id="1_jfnmm"]
 [ext_resource type="Script" path="res://input_handling.gd" id="2_u2n2t"]
 [ext_resource type="Script" path="res://persistent_state.gd" id="3_bfaso"]
-[ext_resource type="Texture2D" uid="uid://b4nytjjhmht4p" path="res://sol_0000.bmp" id="4_j2sml"]
+[ext_resource type="Texture2D" uid="uid://cb1v5vthe5tip" path="res://PLACEHOLDERpng.png" id="4_rm6or"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_iybck"]
 
@@ -45,9 +45,9 @@ position = Vector2(400, 140)
 script = ExtResource("3_bfaso")
 opponent = NodePath("../../Player2")
 
-[node name="SolPlaceholder" type="Sprite2D" parent="Player1/Player1State"]
-position = Vector2(-400, -140)
-texture = ExtResource("4_j2sml")
+[node name="PlayerSprite" type="Sprite2D" parent="Player1/Player1State"]
+position = Vector2(-400, -143)
+texture = ExtResource("4_rm6or")
 
 [node name="Player2" type="CharacterBody2D" parent="."]
 show_behind_parent = true
@@ -65,5 +65,5 @@ debug_color = Color(0, 0.6, 0.701961, 0.419608)
 script = ExtResource("3_bfaso")
 opponent = NodePath("../../Player1")
 
-[node name="SolPlaceholder" type="Sprite2D" parent="Player2/Player2State"]
-texture = ExtResource("4_j2sml")
+[node name="PlayerSprite" type="Sprite2D" parent="Player2/Player2State"]
+texture = ExtResource("4_rm6or")
