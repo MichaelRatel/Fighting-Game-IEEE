@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://b2onvmb5ahwm8"]
+[gd_scene load_steps=9 format=3 uid="uid://b2onvmb5ahwm8"]
 
 [ext_resource type="Script" path="res://state.gd" id="1_jfnmm"]
 [ext_resource type="Script" path="res://input_handling.gd" id="2_u2n2t"]
 [ext_resource type="Script" path="res://persistent_state.gd" id="3_bfaso"]
 [ext_resource type="Texture2D" uid="uid://cb1v5vthe5tip" path="res://PLACEHOLDERpng.png" id="4_rm6or"]
+[ext_resource type="Script" path="res://input_buffer_node.gd" id="5_t8wum"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_iybck"]
 
@@ -49,6 +50,9 @@ opponent = NodePath("../../Player2")
 [node name="PlayerSprite" type="Sprite2D" parent="Player1/Player1State"]
 position = Vector2(-400, -143)
 texture = ExtResource("4_rm6or")
+
+[node name="InputFrame" type="Node2D" parent="Player1"]
+script = ExtResource("5_t8wum")
 
 [node name="Player2" type="CharacterBody2D" parent="."]
 show_behind_parent = true

@@ -2,12 +2,17 @@ extends CharacterBody2D
 
 var persistentState : Node2D
 
+
+
+
 #All and all I hate this, I can't think of anything better right now
 #I'd love for it to be one file for input handling for both players though
 #since it'd make the special move detection probably easier to write, and DRY
 #principles of course/ But this will get very messy
 var leftString
 var rightString
+var upString
+var downString
 
 #Player 1 is a and d atm, player 2 is left and right
 func _ready():
@@ -15,13 +20,19 @@ func _ready():
 		persistentState = get_node("Player1State")
 		leftString = "player1_left"
 		rightString = "player1_right"
+		upString = "player1_up"
+		downString = "player1_down"
 	else:
 		persistentState = get_node("Player2State")		
 		leftString = "player2_left"
 		rightString = "player2_right"
+		upString = "player2_up"
+		downString = "player2_down"
 
 #The extra if checks here make it so you can hold left or right cross screen
 #and it will probably go into the walk backwards
+
+
 
 
 
