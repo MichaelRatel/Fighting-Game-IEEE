@@ -51,7 +51,7 @@ opponent = NodePath("../../Player2")
 position = Vector2(-400, -143)
 texture = ExtResource("4_rm6or")
 
-[node name="InputFrame" type="Node2D" parent="Player1"]
+[node name="InputFrame" type="Node2D" parent="Player1/Player1State"]
 script = ExtResource("5_t8wum")
 
 [node name="Player2" type="CharacterBody2D" parent="."]
@@ -73,3 +73,7 @@ opponent = NodePath("../../Player1")
 [node name="PlayerSprite" type="Sprite2D" parent="Player2/Player2State"]
 position = Vector2(-1, -4)
 texture = ExtResource("4_rm6or")
+
+[node name="InputFrame" type="Node2D" parent="Player2/Player2State"]
+position = Vector2(-400, 140)
+script = ExtResource("5_t8wum")

@@ -1,5 +1,4 @@
 extends Node2D
-
 class_name PersistentState
 
 var state
@@ -20,6 +19,8 @@ var state_factory
 #tracks with the new layout of the scene
 var player : CharacterBody2D
 var sprite : Sprite2D
+var inputBuffer : Array
+var inputNode : Node2D
 
 enum directions {LEFT = -1, RIGHT = 1}
 var direction : directions = directions.RIGHT
@@ -30,6 +31,7 @@ var shouldFlip : bool = true
 func _ready():
 	player = get_parent()
 	sprite = get_node("PlayerSprite")
+	inputNode = get_node("InputFrame")
 	
 	if(player.name == "Player2"):
 		direction = directions.LEFT
@@ -39,7 +41,10 @@ func _ready():
 	
 	if(direction == directions.RIGHT):
 		sprite.set_flip_h(shouldFlip)
-
+	
+	# Creates new Input buffer to hold past 60 frames of inputs
+	# new inputs go to the back of the array, and nodes at the front get popped
+	inputBuffer.resize(60)
 	change_state("idle")
 
 #This all can be removed eventually but for now its needed.
@@ -53,13 +58,36 @@ func _physics_process(_delta):
 #Checks the distance of the players every frame, if the sign of the distance
 #swaps from positive to negative, or vis versa, then the direction of the
 #players also swaps. 
+
+
 func _process(_delta):
 	var distance = player.position.x - opponent.position.x
-	#print(test, player.name,direction)
 	if(direction == directions.LEFT && distance < 0):
 		_flip_direction()
 	elif(direction == directions.RIGHT && distance > 0):
 		_flip_direction()
+		
+	# Writes a new node to the buffer every frame
+	# Add newest input to end
+	add_to_buffer()
+	# Remove oldest input from front 
+	var deadNode = inputBuffer.pop_front()
+	# Free the oldest inputFrame
+	# Since we initialize our array with null, we can't free null.
+	if(deadNode != null):
+		deadNode.free()
+	
+	
+	
+# Creates a new inputFrame, initializes it, and adds it to the buffer.
+# Print is here for testing purposes, we WILL want to print it somewhere if we create a training mode.
+func add_to_buffer():
+	var newNode = InputFrame.new()
+	newNode.set_values()
+	print(newNode.stickPosition)
+	inputBuffer.push_back((newNode))
+	pass
+	
 
 func move_forward():
 	state.move_forward()
@@ -82,6 +110,6 @@ func change_state(new_state_name):
 		pass
 	state = state_factory.get_state(new_state_name).new()
 	# NOTE: GODOT DOCS ARE NOT UPDATED TO GODOT 4 CALLS, THE PURPOSE OF "funcref" IN THE DOCS IS NOW USED BY "Callable"
-	state.setup(Callable(self, "change_state"), get_node("SolPlaceholder"), self)
+	state.setup(Callable(self, "change_state"), get_node("PlayerSprite"), self)
 	state.name = "current_state"
 	add_child(state)
