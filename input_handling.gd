@@ -14,6 +14,7 @@ var rightString
 var upString
 var downString
 
+var currentDirection
 #Player 1 is a and d atm, player 2 is left and right
 func _ready():
 	if(name == "Player1"):
@@ -28,35 +29,29 @@ func _ready():
 		rightString = "player2_right"
 		upString = "player2_up"
 		downString = "player2_down"
+	currentDirection = persistentState.direction
 
 #The extra if checks here make it so you can hold left or right cross screen
 #and it will probably go into the walk backwards
 
 
-
-
-
-
-# This is great, but I think I can clean this up as soon as an input buffer is made,
-# I'm not the most familiar with Godot, but this seems like a lot to get a character to move back and forth
-# - Ratel
+# All inputs are assumed, for consistency, that the player is facing right.
+# if they are facing left, we flip the stick values as though they were facing right
+# This implementation may become problematic if we decide to introduce charge characters, where a '4' input needs to be held for 30 frames
+# The way the array is initialized also means the game takes at least 1 second to start accepting inputs, as the buffer waits to fill before
+# reading new inputs
 func _process(_delta):
-	if Input.is_action_pressed(leftString):
-		if(persistentState.direction == persistentState.directions.LEFT):
-			persistentState.move_forward()
-		elif(persistentState.direction == persistentState.directions.RIGHT):
-			persistentState.move_backwards()
-	elif Input.is_action_pressed(rightString):
-		if(persistentState.direction == persistentState.directions.RIGHT):
-			persistentState.move_forward()
-		elif(persistentState.direction == persistentState.directions.LEFT):
-			persistentState.move_backwards()
-	#else:
-		#persistentState.change_state("idle")
-			
-	#So this could be a good way to reset state, instead of checking physics
-	#values. BUT the way our state machine works is it dynamically creates a new
-	#state object every time change_state is called, this makes it harder for me
-	#at least to compare the current state to the wanted new state so we can
-	#avoid making new state changes every frame. But I can't find a way to do it
-	#that makes me happy.
+	var buffer = persistentState.inputBuffer
+	if(buffer.front() == null):
+		return
+	if (currentDirection == persistentState.directions.LEFT):
+		for node in persistentState.inputBuffer:
+			node.inverseDirection()
+	# Now, we can check for every type of input here, and execute a state change based on priority
+	# if we find a super input first, we super, if not, we special, attack, move, etc.
+	# exact hierarchy is in the design doc in the discord
+	if(buffer.slice(-1)[0].stickPosition == 6):
+		persistentState.move_forward()
+	if(buffer.slice(-1)[0].stickPosition == 4):
+		persistentState.move_backwards()
+	
