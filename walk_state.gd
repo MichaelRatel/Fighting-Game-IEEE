@@ -6,7 +6,7 @@ var friction = 0.003
 
 func _physics_process(_delta):
 	persistent_state.player.velocity.x *= friction
-	if (!Input.is_anything_pressed()):
+	if (persistent_state.inputBuffer.slice(-1)[0].stickPosition == 5):
 		change_state.call("idle")
 
 func move_forward():
