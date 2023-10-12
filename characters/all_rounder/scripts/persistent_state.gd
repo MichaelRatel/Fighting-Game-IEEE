@@ -36,6 +36,7 @@ func _ready():
 	if(player.name == "Player2"):
 		direction = directions.LEFT
 		shouldFlip = false
+		inputNode.player = 2
 	
 	state_factory = StateFactory.new()
 	
@@ -83,6 +84,8 @@ func _process(_delta):
 # Print is here for testing purposes, we WILL want to print it somewhere if we create a training mode.
 func add_to_buffer():
 	var newNode = InputFrame.new()
+	if(player.name == "Player2"):
+		newNode.player = 2
 	newNode.set_values()
 	print(newNode.toString())
 	inputBuffer.push_back((newNode))
