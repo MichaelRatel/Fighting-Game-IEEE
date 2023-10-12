@@ -107,7 +107,7 @@ func _flip_direction():
 	direction *= -1
 
 func change_state(new_state_name):
-	#print("%s :change_state has been called with %s" % [get_parent().to_string(), new_state_name])
+	print("%s :change_state has been called with %s" % [get_parent().to_string(), new_state_name])
 	if state != null:
 		state.queue_free()
 	if(state_factory.get_state(new_state_name) == null):
