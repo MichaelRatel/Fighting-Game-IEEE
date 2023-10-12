@@ -45,7 +45,7 @@ func _process(_delta):
 	if(buffer.front() == null):
 		return
 	
-	if (currentDirection == persistentState.directions.LEFT):
+	if (persistentState.direction == persistentState.directions.LEFT):
 		for node in persistentState.inputBuffer:
 			node.inverseDirection()
 	# Now, we can check for every type of input here, and execute a state change based on priority
