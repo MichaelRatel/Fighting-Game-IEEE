@@ -36,6 +36,7 @@ func _ready():
 	if(player.name == "Player2"):
 		direction = directions.LEFT
 		shouldFlip = false
+		inputNode.player = 2
 	
 	state_factory = StateFactory.new()
 	
@@ -83,11 +84,18 @@ func _process(_delta):
 # Print is here for testing purposes, we WILL want to print it somewhere if we create a training mode.
 func add_to_buffer():
 	var newNode = InputFrame.new()
+	if(player.name == "Player2"):
+		newNode.player = 2
 	newNode.set_values()
-	print(newNode.stickPosition)
+	#print(newNode.toString())
 	inputBuffer.push_back((newNode))
 	pass
 	
+# Creates a Substring of our input buffer, returning an array of the last num nodes in the buffer
+# num: the number of nodes we want to check
+# return: an array in chronological order of the last num nodes.
+func getLatest(num) :
+	return inputBuffer.slice(-num)
 
 func move_forward():
 	state.move_forward()
@@ -102,10 +110,9 @@ func _flip_direction():
 	direction *= -1
 
 func change_state(new_state_name):
-	print("change_state has been called with %s" % new_state_name)
+	print("%s :change_state has been called with %s" % [get_parent().to_string(), new_state_name])
 	if state != null:
 		state.queue_free()
-	#print(state_factory.get_state(new_state_name).new())
 	if(state_factory.get_state(new_state_name) == null):
 		pass
 	state = state_factory.get_state(new_state_name).new()
