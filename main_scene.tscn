@@ -1,10 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://bn135wayxh4ec"]
+[gd_scene load_steps=10 format=3 uid="uid://bn135wayxh4ec"]
 
 [ext_resource type="Script" path="res://characters/all_rounder/scripts/state.gd" id="1_0tagt"]
 [ext_resource type="Script" path="res://characters/input_handling.gd" id="2_uq2q3"]
 [ext_resource type="Script" path="res://characters/all_rounder/scripts/persistent_state.gd" id="3_1hw5f"]
 [ext_resource type="Texture2D" uid="uid://cwxmav0kc1r88" path="res://characters/all_rounder/PLACEHOLDERpng.png" id="4_7tfai"]
 [ext_resource type="Script" path="res://characters/input_buffer_node.gd" id="5_1rudy"]
+[ext_resource type="Script" path="res://InputHistory.gd" id="6_jti7v"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_iybck"]
 
@@ -53,6 +54,11 @@ texture = ExtResource("4_7tfai")
 
 [node name="InputFrame" type="Node2D" parent="Player1/Player1State"]
 script = ExtResource("5_1rudy")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Player1"]
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("6_jti7v")
 
 [node name="Player2" type="CharacterBody2D" parent="."]
 show_behind_parent = true

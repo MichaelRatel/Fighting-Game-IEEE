@@ -50,8 +50,10 @@ func set_values():
 func inverseDirection():
 	if(stickPosition == 1 || stickPosition == 4 || stickPosition == 7):
 		stickPosition += 2
+		return
 	if(stickPosition == 3 || stickPosition == 6 || stickPosition == 9):
 		stickPosition -= 2
+		return
 
 func toString():
 	var string = ""

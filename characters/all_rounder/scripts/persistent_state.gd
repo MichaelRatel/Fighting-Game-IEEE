@@ -87,7 +87,7 @@ func add_to_buffer():
 	if(player.name == "Player2"):
 		newNode.player = 2
 	newNode.set_values()
-	print(newNode.toString())
+	#print(newNode.toString())
 	inputBuffer.push_back((newNode))
 	pass
 	
