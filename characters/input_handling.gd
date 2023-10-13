@@ -53,8 +53,12 @@ func _process(_delta):
 	# if we find a super input first, we super, if not, we special, attack, move, etc.
 	# exact hierarchy is in the design doc in the discord
 	#print(buffer.slice(-1)[0].toString())
+	if(buffer.slice(-1)[0].stickPosition == 7):
+		persistentState.backward_jump()
 	if(buffer.slice(-1)[0].stickPosition == 8):
 		persistentState.neutral_jump()
+	if (buffer.slice(-1)[0].stickPosition == 9):
+		persistentState.forward_jump()
 	if(buffer.slice(-1)[0].stickPosition == 6):
 		persistentState.move_forward()
 	if(buffer.slice(-1)[0].stickPosition == 4):

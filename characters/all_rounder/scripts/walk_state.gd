@@ -17,3 +17,11 @@ func move_forward():
 func move_backwards():
 	persistent_state.player.velocity.x = 0
 	change_state.call("backwalk")
+	
+func forward_jump():
+	persistent_state.player.velocity.x = 0
+	change_state.call("forwardjump")
+	
+func backward_jump():
+	persistent_state.player.velocity.x = 0
+	change_state.call("backwardjump")

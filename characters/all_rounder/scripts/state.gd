@@ -28,6 +28,10 @@ func check_movement_keys():
 	pass
 func neutral_jump():
 	pass
+func forward_jump():
+	pass
+func backward_jump():
+	pass
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

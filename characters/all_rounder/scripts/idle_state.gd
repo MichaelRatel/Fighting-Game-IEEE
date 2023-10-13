@@ -6,6 +6,8 @@ extends State
 class_name IdleState
 
 func _ready():
+	persistent_state.correct_direction(persistent_state.player.position.x - persistent_state.opponent.position.x)
+	persistent_state.player.velocity.x = 0
 	pass # TODO: make an idle animation for the character and call it to play here
 
 # When moving toward the opponent, change state to a walk
@@ -18,3 +20,9 @@ func move_backwards():
 
 func neutral_jump():
 	change_state.call("neutraljump")
+
+func forward_jump():
+	change_state.call("forwardjump")
+func backward_jump():
+	print("jumping from idle state")
+	change_state.call("backwardjump")

@@ -16,6 +16,7 @@ var state_factory
 #through code. Used now for direction flipping
 @export var opponent : CharacterBody2D = null
 
+var currentState: String = "IdleState"
 #I ended up moving the state off of the top of the chain. I think this all makes
 #sense, input informs the state, which then changes the sprite if needed. Which
 #tracks with the new layout of the scene
@@ -65,10 +66,9 @@ func _physics_process(_delta):
 
 func _process(_delta):
 	var distance = player.position.x - opponent.position.x
-	if(direction == directions.LEFT && distance < 0):
-		_flip_direction()
-	elif(direction == directions.RIGHT && distance > 0):
-		_flip_direction()
+	
+	
+	correct_direction(distance)
 		
 	# Writes a new node to the buffer every frame
 	# Add newest input to end
@@ -107,12 +107,25 @@ func move_backwards():
 
 func neutral_jump():
 	state.neutral_jump()
+func forward_jump():
+	state.forward_jump()
+func backward_jump():
+	state.backward_jump()
 
 # Switches direction of player character
 func _flip_direction():
 	shouldFlip = not shouldFlip
 	sprite.set_flip_h(shouldFlip)
 	direction *= -1
+
+# corrects direction based on current state.
+func correct_direction(distance):
+	# when we are airborne, dont flip
+	if(currentState == "forwardjump" || currentState == "backwardjump" || currentState == "neutraljump"):
+		pass
+	elif((direction == directions.LEFT && distance < 0 || direction == directions.RIGHT && distance > 0)):
+		#print(currentState)
+		_flip_direction()
 
 func change_state(new_state_name):
 	print("%s :change_state has been called with %s" % [get_parent().to_string(), new_state_name])
@@ -124,4 +137,5 @@ func change_state(new_state_name):
 	# NOTE: GODOT DOCS ARE NOT UPDATED TO GODOT 4 CALLS, THE PURPOSE OF "funcref" IN THE DOCS IS NOW USED BY "Callable"
 	state.setup(Callable(self, "change_state"), get_node("PlayerSprite"), self)
 	state.name = "current_state"
+	currentState = new_state_name
 	add_child(state)

@@ -20,3 +20,9 @@ func move_forward():
 # While we are moving backwards, keep moving backwards.
 func move_backwards():
 	persistent_state.player.velocity += Vector2(1, 0) * persistent_state.backwardWalkSpeed * (-1 * persistent_state.direction)
+func forward_jump():
+	persistent_state.player.velocity.x = 0
+	change_state.call("forwardjump")
+func backward_jump():
+	persistent_state.player.velocity.x = 0
+	change_state.call("backwardjump")

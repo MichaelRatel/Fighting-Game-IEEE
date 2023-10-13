@@ -12,7 +12,9 @@ func _init():
 		"idle": IdleState,
 		"walk": WalkState,
 		"backwalk": BackwalkState,
-		"neutraljump": NeutralJumpState
+		"neutraljump": NeutralJumpState,
+		"backwardjump": BackJumpState,
+		"forwardjump": ForwardJumpState
 	}
 
 func get_state(state_name):
