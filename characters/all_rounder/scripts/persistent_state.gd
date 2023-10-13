@@ -8,7 +8,9 @@ var state_factory
 #for now it works. Allows the speed to be modified from the inspector
 @export var forwardWalkSpeed : float = 360.0
 @export var backwardWalkSpeed : float = 240.0
-
+@export var gravity : float = 20
+#not actually the jump height, its the velocity the jump first starts at, raising it increases the jump height. i dont have the courage to call it jump force
+@export var jumpHeight : float = 800
 #Allows us to get information on the opponent, just set through the inspector
 #for now, should probably get a full constructor when characters are spawned in
 #through code. Used now for direction flipping
@@ -102,6 +104,9 @@ func move_forward():
 
 func move_backwards():
 	state.move_backwards()
+
+func neutral_jump():
+	state.neutral_jump()
 
 # Switches direction of player character
 func _flip_direction():

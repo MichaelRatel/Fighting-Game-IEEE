@@ -26,6 +26,8 @@ func move_backwards():
 	pass
 func check_movement_keys():
 	pass
+func neutral_jump():
+	pass
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

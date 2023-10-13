@@ -41,6 +41,7 @@ func _ready():
 # The way the array is initialized also means the game takes at least 1 second to start accepting inputs, as the buffer waits to fill before
 # reading new inputs
 func _process(_delta):
+	# We call the buffer every time so it updates
 	var buffer = persistentState.inputBuffer
 	if(buffer.front() == null):
 		return
@@ -51,9 +52,10 @@ func _process(_delta):
 	# Now, we can check for every type of input here, and execute a state change based on priority
 	# if we find a super input first, we super, if not, we special, attack, move, etc.
 	# exact hierarchy is in the design doc in the discord
-	print(buffer.slice(-1)[0].toString())
+	#print(buffer.slice(-1)[0].toString())
+	if(buffer.slice(-1)[0].stickPosition == 8):
+		persistentState.neutral_jump()
 	if(buffer.slice(-1)[0].stickPosition == 6):
 		persistentState.move_forward()
 	if(buffer.slice(-1)[0].stickPosition == 4):
 		persistentState.move_backwards()
-	

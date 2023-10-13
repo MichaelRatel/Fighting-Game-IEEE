@@ -11,7 +11,8 @@ func _init():
 	states = { 
 		"idle": IdleState,
 		"walk": WalkState,
-		"backwalk": BackwalkState
+		"backwalk": BackwalkState,
+		"neutraljump": NeutralJumpState
 	}
 
 func get_state(state_name):
