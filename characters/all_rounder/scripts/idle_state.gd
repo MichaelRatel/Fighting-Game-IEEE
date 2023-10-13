@@ -24,5 +24,4 @@ func neutral_jump():
 func forward_jump():
 	change_state.call("forwardjump")
 func backward_jump():
-	print("jumping from idle state")
 	change_state.call("backwardjump")
