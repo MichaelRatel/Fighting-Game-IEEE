@@ -29,6 +29,7 @@ shape = SubResource("RectangleShape2D_ymc6k")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(2, -257)
+zoom = Vector2(0.635, 0.635)
 
 [node name="Player1" type="CharacterBody2D" parent="."]
 show_behind_parent = true
