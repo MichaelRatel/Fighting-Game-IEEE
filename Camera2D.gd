@@ -14,4 +14,4 @@ func _process(_delta):
 		zoom=Vector2(1,1)
 	if zoom<Vector2(0.34,0.34):
 		zoom=Vector2(0.34,0.34)
-	offset.y = zoom.y*800 -800
+	offset.y = zoom.y*800 -850
