@@ -1,8 +1,10 @@
-[gd_scene load_steps=10 format=3 uid="uid://bn135wayxh4ec"]
+[gd_scene load_steps=12 format=3 uid="uid://bn135wayxh4ec"]
 
 [ext_resource type="Script" path="res://characters/all_rounder/scripts/state.gd" id="1_0tagt"]
+[ext_resource type="Texture2D" uid="uid://wvy47ihkf4io" path="res://icon.svg" id="2_stdc0"]
 [ext_resource type="Script" path="res://characters/input_handling.gd" id="2_uq2q3"]
 [ext_resource type="Script" path="res://characters/all_rounder/scripts/persistent_state.gd" id="3_1hw5f"]
+[ext_resource type="Script" path="res://Camera2D.gd" id="3_nl6dh"]
 [ext_resource type="Texture2D" uid="uid://cwxmav0kc1r88" path="res://characters/all_rounder/PLACEHOLDERpng.png" id="4_7tfai"]
 [ext_resource type="Script" path="res://characters/input_buffer_node.gd" id="5_1rudy"]
 [ext_resource type="Script" path="res://InputHistory.gd" id="6_jti7v"]
@@ -16,7 +18,7 @@ size = Vector2(10000, 271)
 size = Vector2(138, 285)
 
 [node name="Node2D" type="Node2D"]
-position = Vector2(0, 1)
+position = Vector2(1, 1)
 script = ExtResource("1_0tagt")
 
 [node name="Floor" type="StaticBody2D" parent="."]
@@ -27,9 +29,15 @@ physics_material_override = SubResource("PhysicsMaterial_iybck")
 position = Vector2(350.5, 150)
 shape = SubResource("RectangleShape2D_ymc6k")
 
+[node name="Sprite2D" type="Sprite2D" parent="Floor"]
+position = Vector2(360, 152)
+scale = Vector2(78.125, 2)
+texture = ExtResource("2_stdc0")
+
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(2, -257)
-zoom = Vector2(0.635, 0.635)
+offset = Vector2(0, 100)
+script = ExtResource("3_nl6dh")
 
 [node name="Player1" type="CharacterBody2D" parent="."]
 show_behind_parent = true
@@ -74,11 +82,12 @@ disabled = true
 debug_color = Color(0, 0.6, 0.701961, 0.419608)
 
 [node name="Player2State" type="Node2D" parent="Player2" node_paths=PackedStringArray("opponent")]
+position = Vector2(0, 140)
 script = ExtResource("3_1hw5f")
 opponent = NodePath("../../Player1")
 
 [node name="PlayerSprite" type="Sprite2D" parent="Player2/Player2State"]
-position = Vector2(-1, -4)
+position = Vector2(0, -143)
 texture = ExtResource("4_7tfai")
 
 [node name="InputFrame" type="Node2D" parent="Player2/Player2State"]
