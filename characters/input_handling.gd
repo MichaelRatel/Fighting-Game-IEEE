@@ -46,13 +46,17 @@ func _process(_delta):
 	if(buffer.front() == null):
 		return
 	
-	if (persistentState.direction == persistentState.directions.LEFT):
-		for node in persistentState.inputBuffer:
-			node.inverseDirection()
+	
 	# Now, we can check for every type of input here, and execute a state change based on priority
 	# if we find a super input first, we super, if not, we special, attack, move, etc.
 	# exact hierarchy is in the design doc in the discord
 	#print(buffer.slice(-1)[0].toString())
+	
+	
+	var stringBuffer = buffer.slice(-12).map(to_string_call)
+	
+	
+	
 	if(buffer.slice(-1)[0].stickPosition == 7):
 		persistentState.backward_jump()
 	if(buffer.slice(-1)[0].stickPosition == 8):
@@ -63,3 +67,17 @@ func _process(_delta):
 		persistentState.move_forward()
 	if(buffer.slice(-1)[0].stickPosition == 4):
 		persistentState.move_backwards()
+
+func to_string_call(InputFrame):
+	var string = ""
+	string += str(InputFrame.stickPosition)
+	if(InputFrame.aPress):
+		string+='A'
+	if(InputFrame.bPress):
+		string+='B'
+	if(InputFrame.cPress):
+		string+='C'
+	if(InputFrame.dPress):
+		string+='D'
+	return string
+	

@@ -89,6 +89,8 @@ func add_to_buffer():
 	if(player.name == "Player2"):
 		newNode.player = 2
 	newNode.set_values()
+	if(direction == directions.LEFT):
+		newNode.inverseDirection()
 	#print(newNode.toString())
 	inputBuffer.push_back((newNode))
 	pass
@@ -117,6 +119,9 @@ func _flip_direction():
 	shouldFlip = not shouldFlip
 	sprite.set_flip_h(shouldFlip)
 	direction *= -1
+	for node in inputBuffer:
+		inputBuffer[inputBuffer.find(node)].inverseDirection() # flip directions
+	
 
 # corrects direction based on current state.
 func correct_direction(distance):
@@ -125,6 +130,7 @@ func correct_direction(distance):
 		pass
 	elif((direction == directions.LEFT && distance < 0 || direction == directions.RIGHT && distance > 0)):
 		#print(currentState)
+		
 		_flip_direction()
 
 func change_state(new_state_name):
