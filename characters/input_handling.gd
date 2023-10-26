@@ -53,7 +53,9 @@ func _process(_delta):
 	#print(buffer.slice(-1)[0].toString())
 	
 	
-	var stringBuffer = buffer.slice(-12).map(to_string_call)
+	var stringBuffer = buffer.slice(-6).map(to_string_call)
+	if(moves_to_find(stringBuffer, ["6", "5" ,"6"])):
+		persistentState.backward_jump() # PLACEHOLDER: will be used to call run
 	
 	
 	
@@ -81,3 +83,17 @@ func to_string_call(InputFrame):
 		string+='D'
 	return string
 	
+
+# Checks stringBuffer if an input is present, and returns true if there is.
+# stringBuffer: a segment of the inputbuffer, to strings.
+# inputArray: an array consisting of the list of inputs to check, e.g. [2],[3],[6],[A]
+func moves_to_find(stringBuffer, inputArray):
+	
+	var size = inputArray.size()
+	var cur = 0
+	for node in stringBuffer:
+		if(node.contains(inputArray[cur])):
+			cur += 1;
+		if(cur == size):
+			return true
+	return false
