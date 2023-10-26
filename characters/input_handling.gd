@@ -53,9 +53,9 @@ func _process(_delta):
 	#print(buffer.slice(-1)[0].toString())
 	
 	
-	var stringBuffer = buffer.slice(-6).map(to_string_call)
+	var stringBuffer = buffer.slice(-8).map(to_string_call)
 	if(moves_to_find(stringBuffer, ["6", "5" ,"6"])):
-		persistentState.backward_jump() # PLACEHOLDER: will be used to call run
+		persistentState.run() # PLACEHOLDER: will be used to call run
 	
 	
 	

@@ -11,6 +11,7 @@ func _init():
 	states = { 
 		"idle": IdleState,
 		"walk": WalkState,
+		"run": RunState,
 		"backwalk": BackwalkState,
 		"neutraljump": NeutralJumpState,
 		"backwardjump": BackJumpState,

@@ -22,6 +22,8 @@ func setup(change_state, animated_sprite, persistent_state):
 # Unimplemented movement functions. forward and backward are both relevant to the location of player 2.
 func move_forward():
 	pass
+func run():
+	pass
 func move_backwards():
 	pass
 func check_movement_keys():

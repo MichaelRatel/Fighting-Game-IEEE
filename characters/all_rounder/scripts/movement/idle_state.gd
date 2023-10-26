@@ -13,7 +13,8 @@ func _ready():
 # When moving toward the opponent, change state to a walk
 func move_forward():
 	change_state.call("walk")
-
+func run():
+	change_state.call("run")
 # When moving away from the opponent, change state to a backwalk (blocking!)
 func move_backwards():
 	change_state.call("backwalk")

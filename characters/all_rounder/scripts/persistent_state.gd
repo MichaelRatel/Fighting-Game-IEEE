@@ -7,6 +7,7 @@ var state_factory
 #Probably move these somewhere else with the other character specific info
 #for now it works. Allows the speed to be modified from the inspector
 @export var forwardWalkSpeed : float = 360.0
+@export var forwardRunSpeed : float = 720.0
 @export var backwardWalkSpeed : float = 240.0
 @export var gravity : float = 20
 #not actually the jump height, its the velocity the jump first starts at, raising it increases the jump height. i dont have the courage to call it jump force
@@ -103,7 +104,8 @@ func getLatest(num) :
 
 func move_forward():
 	state.move_forward()
-
+func run():
+	state.run()
 func move_backwards():
 	state.move_backwards()
 

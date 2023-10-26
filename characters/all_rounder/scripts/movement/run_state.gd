@@ -1,6 +1,6 @@
 extends State
 
-class_name WalkState
+class_name RunState
 
 var friction = 0.003
 
@@ -11,7 +11,7 @@ func _physics_process(_delta):
 
 func move_forward():
 	#print("continuing to move forwards")
-	persistent_state.player.velocity += Vector2(1, 0) * persistent_state.forwardWalkSpeed * persistent_state.direction
+	persistent_state.player.velocity += Vector2(1, 0) * persistent_state.forwardRunSpeed * persistent_state.direction
 
 # While we are moving backwards, set our velocity back to 0, then change to the backwalk state. 
 func move_backwards():
@@ -25,7 +25,3 @@ func forward_jump():
 func backward_jump():
 	persistent_state.player.velocity.x = 0
 	change_state.call("backwardjump")
-
-func run():
-	persistent_state.player.velocity.x = 360
-	change_state.call("run")
