@@ -26,3 +26,5 @@ func forward_jump():
 func backward_jump():
 	persistent_state.player.velocity.x = 0
 	change_state.call("backwardjump")
+func backdash():
+	change_state.call("backdash")

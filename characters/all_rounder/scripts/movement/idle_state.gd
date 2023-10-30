@@ -18,10 +18,10 @@ func run():
 # When moving away from the opponent, change state to a backwalk (blocking!)
 func move_backwards():
 	change_state.call("backwalk")
-
+func backdash():
+	change_state.call("backdash")
 func neutral_jump():
 	change_state.call("neutraljump")
-
 func forward_jump():
 	change_state.call("forwardjump")
 func backward_jump():

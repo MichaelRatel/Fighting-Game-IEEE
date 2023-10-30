@@ -13,6 +13,7 @@ func _init():
 		"walk": WalkState,
 		"run": RunState,
 		"backwalk": BackwalkState,
+		"backdash": BackdashState,
 		"neutraljump": NeutralJumpState,
 		"backwardjump": BackJumpState,
 		"forwardjump": ForwardJumpState

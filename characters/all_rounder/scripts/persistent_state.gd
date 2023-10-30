@@ -108,7 +108,8 @@ func run():
 	state.run()
 func move_backwards():
 	state.move_backwards()
-
+func backdash():
+	state.backdash()
 func neutral_jump():
 	state.neutral_jump()
 func forward_jump():
