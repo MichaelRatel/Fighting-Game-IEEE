@@ -24,6 +24,8 @@ func move_forward():
 	pass
 func run():
 	pass
+func backdash():
+	pass
 func move_backwards():
 	pass
 func check_movement_keys():

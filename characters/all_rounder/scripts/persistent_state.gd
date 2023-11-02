@@ -1,5 +1,5 @@
 extends Node2D
-class_name PersistentState
+class_name MovementState
 
 var state
 var state_factory
@@ -42,7 +42,7 @@ func _ready():
 		shouldFlip = false
 		inputNode.player = 2
 	
-	state_factory = StateFactory.new()
+	state_factory = MovementStateFactory.new()
 	
 	if(direction == directions.RIGHT):
 		sprite.set_flip_h(shouldFlip)

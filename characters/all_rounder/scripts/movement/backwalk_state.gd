@@ -1,9 +1,6 @@
 extends State
 
 class_name BackwalkState
-
-var persistentState : Node2D
-
 var friction = 0.003
 
 

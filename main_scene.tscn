@@ -52,16 +52,16 @@ shape = SubResource("RectangleShape2D_j0mpk")
 disabled = true
 debug_color = Color(0, 0.6, 0.701961, 0.419608)
 
-[node name="Player1State" type="Node2D" parent="Player1" node_paths=PackedStringArray("opponent")]
+[node name="Player1MovementState" type="Node2D" parent="Player1" node_paths=PackedStringArray("opponent")]
 position = Vector2(400, 140)
 script = ExtResource("3_1hw5f")
 opponent = NodePath("../../Player2")
 
-[node name="PlayerSprite" type="Sprite2D" parent="Player1/Player1State"]
+[node name="PlayerSprite" type="Sprite2D" parent="Player1/Player1MovementState"]
 position = Vector2(-400, -143)
 texture = ExtResource("4_7tfai")
 
-[node name="InputFrame" type="Node2D" parent="Player1/Player1State"]
+[node name="InputFrame" type="Node2D" parent="Player1/Player1MovementState"]
 script = ExtResource("5_1rudy")
 
 [node name="RichTextLabel" type="RichTextLabel" parent="Player1"]
@@ -81,15 +81,15 @@ shape = SubResource("RectangleShape2D_j0mpk")
 disabled = true
 debug_color = Color(0, 0.6, 0.701961, 0.419608)
 
-[node name="Player2State" type="Node2D" parent="Player2" node_paths=PackedStringArray("opponent")]
+[node name="Player2MovementState" type="Node2D" parent="Player2" node_paths=PackedStringArray("opponent")]
 position = Vector2(0, 140)
 script = ExtResource("3_1hw5f")
 opponent = NodePath("../../Player1")
 
-[node name="PlayerSprite" type="Sprite2D" parent="Player2/Player2State"]
+[node name="PlayerSprite" type="Sprite2D" parent="Player2/Player2MovementState"]
 position = Vector2(0, -143)
 texture = ExtResource("4_7tfai")
 
-[node name="InputFrame" type="Node2D" parent="Player2/Player2State"]
+[node name="InputFrame" type="Node2D" parent="Player2/Player2MovementState"]
 position = Vector2(-400, 140)
 script = ExtResource("5_1rudy")

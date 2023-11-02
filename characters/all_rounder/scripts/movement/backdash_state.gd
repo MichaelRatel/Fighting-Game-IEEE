@@ -19,7 +19,7 @@ func _process(delta):
 	else:
 		persistent_state.player.velocity.x = 0
 		change_state.call("idle")
-	pass
+	return
 
 func backdash():
 	pass

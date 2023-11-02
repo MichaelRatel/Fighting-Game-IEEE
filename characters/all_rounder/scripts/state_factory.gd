@@ -2,7 +2,7 @@
 # State factory layout lifted from Godot documentation
 # https://docs.godotengine.org/en/3.2/tutorials/misc/state_design_pattern.html
 
-class_name StateFactory
+class_name MovementStateFactory
 
 var states
 
