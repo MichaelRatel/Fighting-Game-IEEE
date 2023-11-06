@@ -13,6 +13,7 @@ var leftString
 var rightString
 var upString
 var downString
+var buffer 
 
 var currentDirection
 #Player 1 is a and d atm, player 2 is left and right
@@ -30,6 +31,7 @@ func _ready():
 		upString = "player2_up"
 		downString = "player2_down"
 	currentDirection = persistentState.direction
+	buffer = persistentState.inputBuffer
 
 #The extra if checks here make it so you can hold left or right cross screen
 #and it will probably go into the walk backwards
@@ -42,7 +44,7 @@ func _ready():
 # reading new inputs
 func _process(_delta):
 	# We call the buffer every time so it updates
-	var buffer = persistentState.inputBuffer
+	
 	if(buffer.front() == null):
 		return
 	
