@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://bn135wayxh4ec"]
+[gd_scene load_steps=12 format=3 uid="uid://cgucrvogo1kvp"]
 
 [ext_resource type="Script" path="res://characters/all_rounder/scripts/state.gd" id="1_0tagt"]
 [ext_resource type="Texture2D" uid="uid://wvy47ihkf4io" path="res://icon.svg" id="2_stdc0"]
@@ -7,7 +7,7 @@
 [ext_resource type="Script" path="res://Camera2D.gd" id="3_nl6dh"]
 [ext_resource type="Texture2D" uid="uid://cwxmav0kc1r88" path="res://characters/all_rounder/PLACEHOLDERpng.png" id="4_7tfai"]
 [ext_resource type="Script" path="res://characters/input_buffer_node.gd" id="5_1rudy"]
-[ext_resource type="Script" path="res://InputHistory.gd" id="6_jti7v"]
+[ext_resource type="Script" path="res://input_history.gd" id="8_hwci4"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_iybck"]
 
@@ -65,9 +65,11 @@ texture = ExtResource("4_7tfai")
 script = ExtResource("5_1rudy")
 
 [node name="RichTextLabel" type="RichTextLabel" parent="Player1"]
-offset_right = 40.0
-offset_bottom = 40.0
-script = ExtResource("6_jti7v")
+offset_left = 47.0
+offset_top = -181.0
+offset_right = 308.0
+offset_bottom = -55.0
+script = ExtResource("8_hwci4")
 
 [node name="Player2" type="CharacterBody2D" parent="."]
 show_behind_parent = true
