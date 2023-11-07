@@ -45,20 +45,14 @@ func _process(_delta):
 	var buffer = persistentState.inputBuffer
 	if(buffer.front() == null):
 		return
-	
-	
 	# Now, we can check for every type of input here, and execute a state change based on priority
 	# if we find a super input first, we super, if not, we special, attack, move, etc.
 	# exact hierarchy is in the design doc in the discord
-	#print(buffer.slice(-1)[0].toString())
-	
-	
 	var stringBuffer = buffer.slice(-8).map(to_string_call)
 	if(moves_to_find(stringBuffer, ["6", "5" ,"6"])):
 		persistentState.run() 
 	if(moves_to_find(stringBuffer, ["4", "5" ,"4"])):
 		persistentState.backdash() 
-	
 	
 	if(buffer.slice(-1)[0].stickPosition == 7):
 		persistentState.backward_jump()
