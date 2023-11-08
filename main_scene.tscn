@@ -3,10 +3,10 @@
 [ext_resource type="Script" path="res://characters/all_rounder/scripts/state.gd" id="1_0tagt"]
 [ext_resource type="Texture2D" uid="uid://wvy47ihkf4io" path="res://icon.svg" id="2_stdc0"]
 [ext_resource type="Script" path="res://characters/input_handling.gd" id="2_uq2q3"]
-[ext_resource type="Script" path="res://characters/all_rounder/scripts/persistent_state.gd" id="3_1hw5f"]
 [ext_resource type="Script" path="res://Camera2D.gd" id="3_nl6dh"]
 [ext_resource type="Texture2D" uid="uid://cwxmav0kc1r88" path="res://characters/all_rounder/PLACEHOLDERpng.png" id="4_7tfai"]
 [ext_resource type="Script" path="res://characters/input_buffer_node.gd" id="5_1rudy"]
+[ext_resource type="Script" path="res://characters/all_rounder/scripts/movement/persistent_state.gd" id="5_40yjw"]
 [ext_resource type="Script" path="res://InputHistory.gd" id="6_jti7v"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_iybck"]
@@ -54,7 +54,7 @@ debug_color = Color(0, 0.6, 0.701961, 0.419608)
 
 [node name="Player1MovementState" type="Node2D" parent="Player1" node_paths=PackedStringArray("opponent")]
 position = Vector2(400, 140)
-script = ExtResource("3_1hw5f")
+script = ExtResource("5_40yjw")
 opponent = NodePath("../../Player2")
 
 [node name="PlayerSprite" type="Sprite2D" parent="Player1/Player1MovementState"]
@@ -62,6 +62,18 @@ position = Vector2(-400, -143)
 texture = ExtResource("4_7tfai")
 
 [node name="InputFrame" type="Node2D" parent="Player1/Player1MovementState"]
+script = ExtResource("5_1rudy")
+
+[node name="Player1AttackState" type="Node2D" parent="Player1" node_paths=PackedStringArray("opponent")]
+position = Vector2(400, 140)
+script = ExtResource("5_40yjw")
+opponent = NodePath("../../Player2")
+
+[node name="PlayerSprite" type="Sprite2D" parent="Player1/Player1AttackState"]
+position = Vector2(-400, -143)
+texture = ExtResource("4_7tfai")
+
+[node name="InputFrame" type="Node2D" parent="Player1/Player1AttackState"]
 script = ExtResource("5_1rudy")
 
 [node name="RichTextLabel" type="RichTextLabel" parent="Player1"]
@@ -83,7 +95,7 @@ debug_color = Color(0, 0.6, 0.701961, 0.419608)
 
 [node name="Player2MovementState" type="Node2D" parent="Player2" node_paths=PackedStringArray("opponent")]
 position = Vector2(0, 140)
-script = ExtResource("3_1hw5f")
+script = ExtResource("5_40yjw")
 opponent = NodePath("../../Player1")
 
 [node name="PlayerSprite" type="Sprite2D" parent="Player2/Player2MovementState"]

@@ -1,8 +1,8 @@
 extends Node2D
-class_name MovementState
+class_name AttackState
 
 var state
-var movement_state_factory
+var attack_state_factory
 
 #Probably move these somewhere else with the other character specific info
 #for now it works. Allows the speed to be modified from the inspector
@@ -42,7 +42,7 @@ func _ready():
 		shouldFlip = false
 		inputNode.player = 2
 	
-	movement_state_factory = StateFactory.new()
+	attack_state_factory = AttackStateFactory.new()
 	
 	if(direction == directions.RIGHT):
 		sprite.set_flip_h(shouldFlip)
@@ -140,9 +140,9 @@ func change_state(new_state_name):
 	print("%s :change_state has been called with %s" % [get_parent().to_string(), new_state_name])
 	if state != null:
 		state.queue_free()
-	if(movement_state_factory.get_state(new_state_name) == null):
+	if(attack_state_factory.get_state(new_state_name) == null):
 		pass
-	state = movement_state_factory.get_state(new_state_name).new()
+	state = attack_state_factory.get_state(new_state_name).new()
 	# NOTE: GODOT DOCS ARE NOT UPDATED TO GODOT 4 CALLS, THE PURPOSE OF "funcref" IN THE DOCS IS NOW USED BY "Callable"
 	state.setup(Callable(self, "change_state"), get_node("PlayerSprite"), self)
 	state.name = "current_state"
