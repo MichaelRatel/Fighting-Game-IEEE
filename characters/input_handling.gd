@@ -18,13 +18,13 @@ var currentDirection
 #Player 1 is a and d atm, player 2 is left and right
 func _ready():
 	if(name == "Player1"):
-		persistentState = get_node("Player1MovementState")
+		persistentState = get_node("MovementState")
 		leftString = "player1_left"
 		rightString = "player1_right"
 		upString = "player1_up"
 		downString = "player1_down"
 	else:
-		persistentState = get_node("Player2MovementState")		
+		persistentState = get_node("MovementState")
 		leftString = "player2_left"
 		rightString = "player2_right"
 		upString = "player2_up"

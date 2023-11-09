@@ -11,7 +11,8 @@ func _init():
 	states = { 
 		"neutral": NeutralState,
 		"block": BlockState,
-		"hitstun": HitStunState 
+		"hitstun": HitStunState,
+		"blockstun": BlockStunState
 	}
 
 func get_state(state_name):

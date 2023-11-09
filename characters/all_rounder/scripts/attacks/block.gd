@@ -5,7 +5,7 @@ class_name BlockState
 var move_state : MovementState
 
 func _ready():
-	move_state = $"../../Player1MovementState"
+	move_state = $"../../MovementState"
 	pass
 
 func _process(delta):
