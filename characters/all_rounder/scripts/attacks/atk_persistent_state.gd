@@ -2,7 +2,7 @@ extends Node2D
 class_name AttackState
 
 var state
-var attack_state_factory
+var state_factory
 
 #Probably move these somewhere else with the other character specific info
 #for now it works. Allows the speed to be modified from the inspector
@@ -42,46 +42,18 @@ func _ready():
 		shouldFlip = false
 		inputNode.player = 2
 	
-	attack_state_factory = AttackStateFactory.new()
+	state_factory = AttackStateFactory.new()
 	
 	if(direction == directions.RIGHT):
 		sprite.set_flip_h(shouldFlip)
 	
-	# Creates new Input buffer to hold past 60 frames of inputs
-	# new inputs go to the back of the array, and nodes at the front get popped
+	# TODO remove this and read inputs from movementstate
+	# OR reparent inputnode
 	inputBuffer.resize(60)
-	change_state("idle")
-
-#This all can be removed eventually but for now its needed.
-#Honestly the movement included with the Godot state sample was awful
-#Using a whole vector for speed? Weird since speed is a scalar value. It also
-#had to be changed to allow for changes in direction with different walk speeds
-#which it now does.
-func _physics_process(_delta):
-	player.move_and_slide()
-
-#Checks the distance of the players every frame, if the sign of the distance
-#swaps from positive to negative, or vis versa, then the direction of the
-#players also swaps. 
+	change_state("neutral")
 
 
-func _process(_delta):
-	var distance = player.position.x - opponent.position.x
-	
-	
-	correct_direction(distance)
-		
-	# Writes a new node to the buffer every frame
-	# Add newest input to end
-	add_to_buffer()
-	# Remove oldest input from front 
-	var deadNode = inputBuffer.pop_front()
-	# Free the oldest inputFrame
-	# Since we initialize our array with null, we can't free null.
-	if(deadNode != null):
-		deadNode.free()
-	
-	
+
 	
 # Creates a new inputFrame, initializes it, and adds it to the buffer.
 # Print is here for testing purposes, we WILL want to print it somewhere if we create a training mode.
@@ -102,20 +74,8 @@ func add_to_buffer():
 func getLatest(num) :
 	return inputBuffer.slice(-num)
 
-func move_forward():
-	state.move_forward()
-func run():
-	state.run()
 func move_backwards():
-	state.move_backwards()
-func backdash():
-	state.backdash()
-func neutral_jump():
-	state.neutral_jump()
-func forward_jump():
-	state.forward_jump()
-func backward_jump():
-	state.backward_jump()
+	state.block()
 
 # Switches direction of player character
 func _flip_direction():
@@ -137,12 +97,12 @@ func correct_direction(distance):
 		_flip_direction()
 
 func change_state(new_state_name):
-	print("%s :change_state has been called with %s" % [get_parent().to_string(), new_state_name])
+	print("%s : ATK change_state has been called with %s" % [get_parent().to_string(), new_state_name])
 	if state != null:
 		state.queue_free()
-	if(attack_state_factory.get_state(new_state_name) == null):
+	if(state_factory.get_state(new_state_name) == null):
 		pass
-	state = attack_state_factory.get_state(new_state_name).new()
+	state = state_factory.get_state(new_state_name).new()
 	# NOTE: GODOT DOCS ARE NOT UPDATED TO GODOT 4 CALLS, THE PURPOSE OF "funcref" IN THE DOCS IS NOW USED BY "Callable"
 	state.setup(Callable(self, "change_state"), get_node("PlayerSprite"), self)
 	state.name = "current_state"
